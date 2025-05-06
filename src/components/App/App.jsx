@@ -4,9 +4,9 @@ import ContactForm from "../ContactForm/ContactForm";
 import SearchBox from "../SearchBox/SearchBox";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteContact, fetchContacts } from "../../redux/contactsOps";
-import { selectContacts } from "../../redux/contactsSlice";
-import { selectNameFilter } from "../../redux/filtersSlice";
+import { deleteContact, fetchContacts } from "../../redux/contacts/operations";
+import { selectContacts } from "../../redux/contacts/selectors";
+import { selectNameFilter } from "../../redux/filters/selectors";
 import { useEffect } from "react";
 
 const App = () => {
