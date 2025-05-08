@@ -3,38 +3,36 @@ import ContactList from "../ContactList/ContactList";
 import ContactForm from "../ContactForm/ContactForm";
 import SearchBox from "../SearchBox/SearchBox";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteContact, fetchContacts } from "../../redux/contacts/operations";
-import { selectContacts } from "../../redux/contacts/selectors";
-import { selectNameFilter } from "../../redux/filters/selectors";
+import { useDispatch } from "react-redux";
+import { fetchContacts } from "../../redux/contacts/operations";
 import { useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+import HomePage from "../../pages/HomePage/HomePage";
+import LoginPage from "../../pages/LoginPage/LoginPage";
+import RegistrationPage from "../../pages/RegistrationPage/RegistrationPage";
+import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
+import ContactsPage from "../../pages/ContactsPage/ContactsPage";
+import Header from "../Header/Header";
 
 const App = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(selectContacts);
-  const filter = useSelector(selectNameFilter);
 
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  const handleDelete = (id) => {
-    dispatch(deleteContact(id));
-  };
-
-  const filteredContacts = contacts.filter((contact) =>
-    contact.name.toLowerCase().includes(filter.toLowerCase())
-  );
-
   return (
     <div className={css.container}>
       <h1 className={css.title}>Phonebook</h1>
 
-      <ContactForm />
-
-      <SearchBox />
-
-      <ContactList contacts={filteredContacts} onDelete={handleDelete} />
+      <Header />
+      <Routes>
+        <Route path="/" element={<HomePage />}></Route>
+        <Route path="/login" element={<LoginPage />}></Route>
+        <Route path="/register" element={<RegistrationPage />}></Route>
+        <Route path="/contacts " element={<ContactsPage />}></Route>
+        <Route path="*" element={<NotFoundPage />}></Route>
+      </Routes>
     </div>
   );
 };

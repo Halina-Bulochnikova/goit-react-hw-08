@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
+/*import {
   registerThunk,
   loginThunk,
   logoutThunk,
   refreshUserThunk,
-} from "./operations";
+} from "./operations";*/
 
 
 const initialState = {
@@ -20,7 +20,7 @@ const initialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  extraReducers: (builder) => {
+  /*extraReducers: (builder) => {
     builder
       .addCase(registerThunk.fulfilled, (state, action) => {
         state.user = action.payload.user;
@@ -41,7 +41,7 @@ const authSlice = createSlice({
         .addCase(refreshUserThunk.rejected, (state) => {
             state.isRefreshing = false;
       })
-  },
+  },*/
 });
 
 export default authSlice.reducer;
