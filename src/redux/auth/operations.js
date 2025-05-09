@@ -1,20 +1,24 @@
-/*import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-axios.defaults.baseURL = "https://connections-api.goit.global/";
+export const goitAPI = axios.create({
+  baseURL: "https://connections-api.goit.global/",
+});
 
-export const registerThunk = createAsyncThunk('createAsyncThunk', async (body, thunkApi) => {
+export const registerThunk = createAsyncThunk('register', async (body, thunkApi) => {
     try {
-        return thunkApi.rejectWithValue(error.message);
+    const response = await goitAPI.post("/users/signup", body);
+    return response.data;
 
     } catch (error) {
         return thunkApi.rejectWithValue(error.message); 
     }
     
 });
-export const loginThunk = createAsyncThunk("createAsyncThunk", async (body, thunkApi) => {
+export const loginThunk = createAsyncThunk('login', async (body, thunkApi) => {
     try {
-return thunkApi.rejectWithValue(error.message);
+        const response = await goitAPI.post("/users/login", body);
+        return response.data;
     } catch (error) {
         return thunkApi.rejectWithValue(error.message);
     }});
