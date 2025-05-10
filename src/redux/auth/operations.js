@@ -5,20 +5,56 @@ export const goitAPI = axios.create({
   baseURL: "https://connections-api.goit.global/",
 });
 
-export const registerThunk = createAsyncThunk('register', async (body, thunkApi) => {
+const setAuthHeader = (token) => {
+  goitAPI.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
+const removeAuthHeader = () => {
+  goitAPI.defaults.headers.common.Authorization = ``;
+};
+export const registerThunk = createAsyncThunk(
+  "register",
+  async (body, thunkApi) => {
     try {
-    const response = await goitAPI.post("/users/signup", body);
-    return response.data;
-
-    } catch (error) {
-        return thunkApi.rejectWithValue(error.message); 
-    }
-    
-});
-export const loginThunk = createAsyncThunk('login', async (body, thunkApi) => {
-    try {
-        const response = await goitAPI.post("/users/login", body);
+      const response = await goitAPI.post("/users/signup", body);
+        setAuthHeader(response.data.token);
         return response.data;
     } catch (error) {
-        return thunkApi.rejectWithValue(error.message);
-    }});
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+export const loginThunk = createAsyncThunk("login", async (body, thunkApi) => {
+  try {
+    const response = await goitAPI.post("/users/login", body);
+      setAuthHeader(response.data.token);
+      return response.data;
+  } catch (error) {
+    return thunkApi.rejectWithValue(error.message);
+  }
+});
+
+export const logoutThunk = createAsyncThunk("logout", async (body, thunkApi) => {
+  try {
+    await goitAPI.post("/users/logout");
+    removeAuthHeader();
+  } catch (error) {
+    return thunkApi.rejectWithValue(error.message);
+  }
+});
+export const refreshUserThunk = createAsyncThunk(
+  "auth/refreshUser",
+  async (_, thunkAPI) => {
+    try {
+      const state = thunkAPI.getState();
+      const token = state.auth.token;
+
+      if (!token) return thunkAPI.rejectWithValue("No token");
+
+      axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+      const res = await axios.get("/users/current");
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

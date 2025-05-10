@@ -3,7 +3,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import s from "./LoginForm.module.css";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { loginThunk } from '../../redux/auth/operations';
+import { loginThunk } from "../../redux/auth/operations";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -26,10 +26,10 @@ const LoginForm = () => {
       .required("Поле обов'язкове"),
   });
 
-  const handleSubmit = (values, options) => {
+  const handleSubmit = (values) => {
     console.log(values);
     dispatch(loginThunk(values));
-}
+  };
   return (
     <div>
       <Formik
@@ -43,20 +43,20 @@ const LoginForm = () => {
             <Field className={s.field} type="email" name="email"></Field>
             <ErrorMessage className={s.error} name="email" component="div" />
           </label>
-        </Form>
-        <Form className={s.formBlock}>
+
           <label className={s.label}>
             <span>Password</span>
             <Field className={s.field} type="password" name="password"></Field>
             <ErrorMessage className={s.error} name="password" component="div" />
           </label>
-        </Form>
+       
         <Link className="text-lg text-center" to="/register">
           Спочатку зареєструйся
         </Link>
         <button className={s.link} type="submit">
           Login
-        </button>
+          </button>
+        </Form>
       </Formik>
     </div>
   );
