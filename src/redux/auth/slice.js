@@ -38,8 +38,8 @@ const authSlice = createSlice({
         state.isRefreshing = true;
       })
       .addCase(refreshUserThunk.fulfilled, (state, action) => {
-        state.user = action.payload;
         state.isLoggedIn = true;
+        state.user = action.payload;
         state.isRefreshing = false;
       })
       .addCase(refreshUserThunk.rejected, (state) => {

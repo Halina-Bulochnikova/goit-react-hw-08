@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 export const goitAPI = axios.create({
   baseURL: "https://connections-api.goit.global/",
@@ -16,9 +17,11 @@ export const registerThunk = createAsyncThunk(
   async (body, thunkApi) => {
     try {
       const response = await goitAPI.post("/users/signup", body);
-        setAuthHeader(response.data.token);
-        return response.data;
+      toast.success("Ви успішно зареєструвалися!");
+      setAuthHeader(response.data.token);
+      return response.data;
     } catch (error) {
+      toast.error("Ця адреса вже зараеєстрована!");
       return thunkApi.rejectWithValue(error.message);
     }
   }
@@ -26,14 +29,16 @@ export const registerThunk = createAsyncThunk(
 export const loginThunk = createAsyncThunk("login", async (body, thunkApi) => {
   try {
     const response = await goitAPI.post("/users/login", body);
-      setAuthHeader(response.data.token);
-      return response.data;
+    toast.success("Ви успішно авторизувалися!");
+    setAuthHeader(response.data.token);
+    return response.data;
   } catch (error) {
+    toast.error("Ця адреса ще не зареєстрована!");
     return thunkApi.rejectWithValue(error.message);
   }
 });
 
-export const logoutThunk = createAsyncThunk("logout", async (body, thunkApi) => {
+export const logoutThunk = createAsyncThunk("logout", async (_, thunkApi) => {
   try {
     await goitAPI.post("/users/logout");
     removeAuthHeader();
@@ -45,14 +50,16 @@ export const refreshUserThunk = createAsyncThunk(
   "auth/refreshUser",
   async (_, thunkAPI) => {
     try {
-      const state = thunkAPI.getState();
-      const token = state.auth.token;
+      const savedToken = thunkAPI.getState().auth.token;
+      console.log(savedToken);
 
-      if (!token) return thunkAPI.rejectWithValue("No token");
+      if (!savedToken) return thunkAPI.rejectWithValue("No token");
 
-      axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-      const res = await axios.get("/users/current");
-      return res.data;
+      setAuthHeader(savedToken);
+
+      const response = await goitAPI.get("/users/current");
+      console.log(response.data);
+      return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

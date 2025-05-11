@@ -1,7 +1,9 @@
+import { lazy } from "react";
 import { useSelector } from "react-redux";
-import LoginForm from "../../components/LoginForm/LoginForm";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
 import { Navigate } from "react-router-dom";
+
+const LoginForm = lazy(() => import("../../components/LoginForm/LoginForm"));
 
 const LoginPage = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);

@@ -1,14 +1,14 @@
-import React from "react";
-import css from "./ContactList.module.css";
-import Contact from "../Contact/Contact";
+import s from "./ContactList.module.css";
 import { useSelector } from "react-redux";
 import { selectFilteredContacts } from "../../redux/filters/selectors";
+import { lazy } from "react";
+
+const Contact = lazy(() => import("../Contact/Contact"));
 
 function ContactList() {
   const contacts = useSelector(selectFilteredContacts);
-
   return (
-    <ul className={css.contaktList}>
+    <ul className={s.contaktList}>
       {contacts.map((contact) => (
         <Contact
           key={contact.id}
