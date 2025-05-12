@@ -29,6 +29,8 @@ body {
   overflow-x: hidden;
   font-family: sans-serif;
   background-color: #c0f0d5;
+  min-width: 320px;
+  min-height: 100vh;
 }
 
 h1 {

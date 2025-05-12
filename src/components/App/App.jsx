@@ -45,11 +45,7 @@ const App = () => {
 
           <Route
             path="/contacts"
-            element={
-              <PrivateRoute>
-                <ContactsPage />
-              </PrivateRoute>
-            }
+            element={<PrivateRoute><ContactsPage /></PrivateRoute>}
           ></Route>
 
           <Route path="*" element={<NotFoundPage />}></Route>
