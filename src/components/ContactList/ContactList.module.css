@@ -1,7 +1,12 @@
 .contaktList {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 8px;
   list-style: none;
   padding: 0;
+}
+@media screen and (min-width: 768px) {
+ .contaktList {
+  gap: 16px;
+ }
 }

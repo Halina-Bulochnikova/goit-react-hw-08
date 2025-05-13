@@ -1,0 +1,13 @@
+.layot {
+    width: 100%;
+}
+@media screen and (min-width: 768px) {
+    .layot {
+        width: 100%;
+    }
+}
+@media screen and (min-width: 1440px) {
+    .layot {
+        width: 100%;
+    }
+}

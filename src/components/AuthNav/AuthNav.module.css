@@ -2,29 +2,37 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 32px;
-  font-size: 26px;
-  margin-left: 100px;
-  
+  gap: 12px;
+  font-size: 16px;
+}
+@media screen and (min-width: 768px) {
+  .authNavigation {
+    gap: 32px;
+    font-size: 26px;
+    margin-left: 100px;
   }
-  
+}
+
+.link {
+  text-decoration: none;
+  color: rgb(81, 187, 10);
+  font-weight: 500;
+  transition: color 0.3s ease;
+  border: 1px solid rgb(58, 54, 54);
+  border-radius: 5px;
+  padding: 2px 10px;
+  background-color: rgb(81, 74, 74);
+}
+@media screen and (min-width: 768px) {
   .link {
-    text-decoration: none;
-    color: rgb(81, 187, 10);
-    font-weight: 500;
-    transition: color 0.3s ease;
-    border: 1px solid rgb(58, 54, 54);
-    border-radius: 5px;
     padding: 10px 20px;
-    background-color: rgb(81, 74, 74);
   }
-  
-  .link:hover {
-    color: #2e7d32;
-  }
-  
-  .active {
-    color: #2e7d32;
-    border-bottom: 2px solid #2e7d32;
-  }
-  
+}
+.link:hover {
+  color: #2e7d32;
+}
+
+.active {
+  color: #2e7d32;
+  border-bottom: 2px solid #2e7d32;
+}

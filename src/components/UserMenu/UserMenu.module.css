@@ -1,18 +1,30 @@
 .userMenu {
   display: flex;
   align-items: center;
-  gap: 32px;
-  font-size: 26px;
-  
+  gap: 10px;
+  font-size: 16px;
 }
-
+@media screen and (min-width: 768px) {
+  .userMenu {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    font-size: 26px;
+  }
+}
 .userName {
-  font-weight: 600;
+  font-weight: 500;
   color: #1e1a1a;
-  font-size: 18px;
+  font-size: 14px;
+}
+@media screen and (min-width: 768px) {
+  .userName {
+    font-weight: 600;
+    font-size: 18px;
+  }
 }
 .logoutBtn {
-    padding: 4px 20px;
+    padding: 2px 6px;
     background-color: #515b64;
     color: rgb(187, 25, 147);
     border: none;
@@ -22,6 +34,11 @@
     text-decoration: none;
     font-weight: 500;
     font-size: 16px;
+}
+@media screen and (min-width: 768px) {
+ .logoutBtn {
+  padding: 4px 20px;
+ }
 }
 .logoutBtn:hover {
     background-color: #758176;

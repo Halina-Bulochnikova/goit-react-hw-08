@@ -9,15 +9,15 @@
   column-gap: 20px;
   justify-content: space-between;
 }
+
 .contatcCard {
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .info {
   display: flex;
   align-items: center;
-  
 }
 
 .contactIcon {
